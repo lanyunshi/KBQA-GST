@@ -18,7 +18,7 @@ class Dataset(data.Dataset):
         self.sentences = self.read_sentences(os.path.join(path, 'nlq.txt'), dic)
         self.templates = self.read_templates(os.path.join(path, 'nlq_tem.txt'), dic)
         units_file = os.path.join(path, 'other_units.json') if use_units else os.path.join(path, 'topic_entities.json')
-        candidate_file = os.path.join(path, 'candidate_paths_EnrichSMART3.json') if use_units else os.path.join(path, 'candidate_paths_EnrichSMART2.json')
+        candidate_file = os.path.join(path, 'candidate_paths_other_units.json') if use_units else os.path.join(path, 'candidate_paths.json')
         if is_train:
             self.to_entities, self.coincident = self.read_topic_entities(os.path.join(path, 'topic_entities.json'), #filter_topicentity_all_types
                                                         units_file, dic, topic_limit = topic_limit) # topicentity_all_types

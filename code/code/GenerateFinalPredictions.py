@@ -25,7 +25,7 @@ def generate_final_predictions(pred, folder, category, threshold = 0.9, use_type
 
     lineidx2qidx = {}
     if 'CWQ' in folder:
-        with open('data/CWQ/ComplexWebQuestions_%s.json' %category) as f:
+        with open('data/CWQ/ComplexWebQuestions_test_wans.json') as f:
             lines = json.load(f)
             for line_idx, line in enumerate(lines):
                 lineidx2qidx[line_idx] = line["ID"]
@@ -48,7 +48,7 @@ def generate_final_predictions(pred, folder, category, threshold = 0.9, use_type
                         answer += [a["answer"]]
                 answers += [([ans.lower() for ans in answer if ans != None], len(line["answers"]))]
         candidate_path_pool = []
-        with open('data/%s_CWQ/candidate_paths_EnrichSMART2.json' %category) as f:
+        with open('data/%s_CWQ/candidate_paths_other_units.json' %category) as f:
             for line_idx, line in enumerate(f):
                 line = json.loads(line)
                 candidate_path_pool += [line]
@@ -59,7 +59,7 @@ def generate_final_predictions(pred, folder, category, threshold = 0.9, use_type
                 answers += [line.split('\t')]
         candidate_path_pool = [] # if 'Enrich' in pred else 'candidate_paths_SMART.json'
         #if os.path.exists(os.path.join(test_path, 'candidate_paths_EnrichSMART2.json')):
-        with open(os.path.join(test_path, 'candidate_paths_EnrichSMART2.json')) as f:
+        with open(os.path.join(test_path, 'candidate_paths_other_units.json')) as f:
             for line_idx, line in enumerate(f):
                 line = json.loads(line)
                 candidate_path_pool += [line]
@@ -246,12 +246,11 @@ def constraint_detection(q, r):
                     return sim
     return 0.
 
-def main(pred):
-    folder = 'WBQ'
+def main(pred, folder):
     for category in ['test']:
         foldername = os.path.dirname(os.getcwd())
         for threshold in [1]:
             generate_final_predictions(pred, folder, category, threshold = threshold) #
 
 if __name__ == "__main__":
-    main('TG+EE_tmp')
+    main('TG+EE', 'CWQ')

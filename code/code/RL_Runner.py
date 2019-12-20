@@ -32,12 +32,12 @@ def main(args, load_save = None, load_id = None):
         dic = {"<PAD>": 0, "<UNK>": 1, "<E>": 2}
 
     args.model_type = 'TG+EE'
-    args.train_q = 'data/train_WBQ'
-    args.dev_q = 'data/dev_WBQ'
-    args.test_q = 'data/test_WBQ'
+    args.train_q = 'data/train_CWQ'
+    args.dev_q = 'data/dev_CWQ'
+    args.test_q = 'data/test_CWQ'
     args.tp_model = 'CoAttention'
     args.model = 'CNN'
-    args.is_train = 1
+    args.is_train = 0
     args.save_id = 'TG+EE_tmp'
     args.load_id = 'TG+EE'
     args.train_execution_engine = 1
